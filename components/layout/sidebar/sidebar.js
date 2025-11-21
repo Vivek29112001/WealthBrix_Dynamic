@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -119,7 +119,7 @@ export default function Sidebar() {
                 {/* FOOTER AREA */}
                 <div className="p-4 border-t dark:border-neutral-800 flex items-center gap-3">
                     <Avatar className="h-8 w-8">
-                        <AvatarFallback>WB</AvatarFallback>
+                        <AvatarImage src="/assets/avatar.jpg" />
                     </Avatar>
 
                     {!isSidebarCollapsed && (
