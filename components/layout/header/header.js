@@ -59,7 +59,7 @@ export default function Header() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer">
-                            <AvatarImage src="/avatar.jpg" />
+                            <AvatarImage src="/assets/avatar.jpg" />
                             <AvatarFallback>WB</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
