@@ -12,7 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLayout } from "@/context/LayoutContext";
 import { Bell, LayoutPanelLeft, Search, SunMoon } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/layout/theme/theme-toggle";
 
 
 export default function Header() {

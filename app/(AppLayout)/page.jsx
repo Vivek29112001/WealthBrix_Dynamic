@@ -1,12 +1,18 @@
-import Seo from '@/shared/seo/seo'
-import React from 'react'
+"use client";
+
+import PageHeader from "@/shared/common/pageHeader";
 
 const Dashboard = () => {
+
+
     return (
         <>
-            <Seo title="Dashboard" />
+            <PageHeader
+                title="Dashboard"
+                actionTitle="Dashboard"
+            />
         </>
-    )
-}
+    );
+};
 
-export default Dashboard
+export default Dashboard;

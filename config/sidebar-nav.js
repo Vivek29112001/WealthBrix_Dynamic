@@ -9,7 +9,7 @@ import {
 export const sidebarNav = [
     {
         title: "Dashboard",
-        href: "/dashboard",
+        href: "/",
         icon: LayoutDashboard,
     },
     {

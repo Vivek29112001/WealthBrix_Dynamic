@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,10 +11,57 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLayout } from "@/context/LayoutContext";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+
+// Sidebar logo component with theme-based logos & text
+function SidebarLogo({ isSidebarCollapsed }) {
+    const { theme, resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) {
+        // Placeholder to prevent hydration mismatch
+        return (
+            <div className="h-16 flex items-center justify-center px-4 border-b dark:border-neutral-800">
+                {isSidebarCollapsed ? (
+                    <div className="text-xl font-bold text-black dark:text-white">WB</div>
+                ) : (
+                    <div style={{ width: 180, height: 60 }}></div>
+                )}
+            </div>
+        );
+    }
+
+    const currentTheme = theme === "system" ? resolvedTheme : theme;
+
+    return (
+        <div className="h-16 flex items-center justify-center px-4 border-b dark:border-neutral-800">
+            {isSidebarCollapsed ? (
+                <div
+                    className={cn(
+                        "text-xl font-bold",
+                        currentTheme === "dark" ? "text-white" : "text-black"
+                    )}
+                >
+                    WB
+                </div>
+            ) : (
+                <Image
+                    src={currentTheme === "dark" ? "/assets/dark_logo.png" : "/assets/light_logo.png"}
+                    alt="Wealth Brix Logo"
+                    width={180}
+                    height={60}
+                    className="object-contain"
+                />
+            )}
+        </div>
+    );
+}
 
 export default function Sidebar() {
     const pathname = usePathname();
-
     const { isSidebarCollapsed } = useLayout();
 
     return (
@@ -36,15 +84,11 @@ export default function Sidebar() {
             <div
                 className={cn(
                     "hidden lg:flex flex-col h-screen border-r bg-white dark:bg-neutral-900 transition-all duration-300",
-                    isSidebarCollapsed ? "w-16" : "w-64"
+                    isSidebarCollapsed ? "w-16" : "w-50"
                 )}
             >
                 {/* LOGO */}
-                <div className="h-16 flex items-center px-4 border-b dark:border-neutral-800">
-                    {!isSidebarCollapsed && (
-                        <h1 className="font-bold text-xl whitespace-nowrap">Wealth Brix</h1>
-                    )}
-                </div>
+                <SidebarLogo isSidebarCollapsed={isSidebarCollapsed} />
 
                 {/* NAVIGATION */}
                 <ScrollArea className="flex-1">
@@ -58,13 +102,13 @@ export default function Sidebar() {
                                     key={item.title}
                                     href={item.href}
                                     className={cn(
-                                        "flex items-center gap-3 px-4 py-2 text-sm font-medium rounded-lg transition-all",
+                                        "flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg transition-all",
                                         active
                                             ? "bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white"
-                                            : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                            : "text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                                     )}
                                 >
-                                    <Icon className="w-5 h-5" />
+                                    <Icon className="w-4 h-3" />
                                     {!isSidebarCollapsed && <span>{item.title}</span>}
                                 </Link>
                             );
@@ -90,6 +134,7 @@ export default function Sidebar() {
     );
 }
 
+// MOBILE SIDEBAR
 function MobileSidebar() {
     const pathname = usePathname();
 
@@ -112,7 +157,7 @@ function MobileSidebar() {
                                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium",
                                 active
                                     ? "bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white"
-                                    : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                    : "text-neutral-900 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                             )}
                         >
                             <Icon className="w-5 h-5" />
