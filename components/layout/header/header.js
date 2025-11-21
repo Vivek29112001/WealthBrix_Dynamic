@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLayout } from "@/context/LayoutContext";
-import { Bell, LayoutPanelLeft, Search, SunMoon } from "lucide-react";
+import { Bell, LayoutPanelLeft, Search } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/theme/theme-toggle";
 
 
@@ -59,7 +59,7 @@ export default function Header() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer">
-                            <AvatarImage src="/avatar.png" />
+                            <AvatarImage src="/avatar.jpg" />
                             <AvatarFallback>WB</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
